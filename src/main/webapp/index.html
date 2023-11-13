@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>와이파이 정보 구하기</title>
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <style>
+        #wifi_table thead {
+            background-color: #00FF00; 
+            border: 1px solid #000; 
+        }
+        #wifi_table thead th {
+            border-right: 1px solid #000; 
+        }
+        #lat, #lng, button {
+        display: inline-block;
+        margin-right: 10px; /* 요소 사이의 간격 (선택적) */
+        }
+        #wifi_table {
+            border-collapse: collapse; /* 테이블의 테두리를 결합합니다. */
+            border-spacing: 0; /* 테이블 셀 사이의 간격을 0으로 설정합니다. */
+            width: 100%; /* 테이블의 너비를 100%로 설정합니다. */
+        }
+        #wifi_table th, #wifi_table td {
+            padding: 10px; /* 테이블 셀의 여백을 10px으로 설정합니다. */
+            border: 1px solid #ccc; /* 테이블 셀의 테두리를 설정합니다. */
+        }
+        #wifi_table tr:nth-child(even) {
+            background-color: #f2f2f2; /* 테이블 행의 배경색을 설정합니다. */
+        }
+
+	</style>
+	
+	<!-- 버튼 : 내 위치 가져오기 + 위치히스토리에 저장  -->
+	<script src="js/getLocation.js"></script>
+
+	<!-- 버튼 : 내 위치 기준으로 거리 가까운순으로 WIFI정보 나열  -->
+	<script src = "js/getNearbyWifiInfo.js"></script>
+
+	<!-- WIFI이름 클릭시 : 새탭 표시 -->
+	<script src = "js/showWifiInfo.js"></script>
+
+<body>
+    <h1>와이파이 정보 구하기</h1>
+	<a href="/WIFI-1107">홈</a> |
+	<a href="/WIFI-1107/LocationHistoryServlet">위치 히스토리 목록</a> |
+	<a href="/ApiDataToDBServlet">OpenAPI 와이파이 정보 가져오기</a> |
+	<a href="/bookmark-group">북마크 보기</a> |
+	<a href="/WIFI-1107/jsp/BookmarkGroupManagement.jsp">북마크 그룹 관리</a>>
+
+
+	<div  style="display: flex">
+    <p>LAT: <input type="text" id="lat" value="0.0"></p>
+    <p>LNG: <input type="text" id="lng" value="0.0"></p>
+
+    <button onclick="getLocation()" style="font-size: 14px; padding: 5px 10px;">내 위치 가져오기</button>
+    <button onclick="getNearbyWifiInfo()" style="font-size: 14px; padding: 5px 10px;">근처 WIFI 정보 보기</button>
+	</div>
+    
+    <table class="table table-striped" id="wifi_table">
+        <thead>
+            <tr>
+                <th>거리(km)</th>
+                <th>관리번호</th>
+                <th>자치구</th>
+                <th>와이파이명</th>
+                <th>도로명주소</th>
+                <th>상세주소</th>
+                <th>설치위치(층)</th>
+                <th>설치유형</th>
+                <th>설치기관</th>
+                <th>서비스구분</th>
+                <th>망종류</th>
+                <th>설치년도</th>
+                <th>실내외구분</th>
+                <th>wifi접속환경</th>
+                <th>Y좌표</th>
+                <th>X좌표</th>
+                <th>작업일자</th>
+            </tr>
+        </thead>
+        <tbody id="wifi_table_body">
+            <!-- Maria DB에서 wifi_table 내용 불러오기 : getNearbyWifiInfo 에서 처리-->
+        </tbody>
+    </table>
+</body>
+</html>
